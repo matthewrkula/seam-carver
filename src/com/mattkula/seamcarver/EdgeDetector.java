@@ -31,9 +31,11 @@ public class EdgeDetector {
         int width = image.getWidth();
 
         for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                edgeImage.setRGB(x, y, 0xFFFFFFFF);
-            }
+            edgeImage.setRGB(0, y, 0xFFFFFFFF);
+            edgeImage.setRGB(width-1, y, 0xFFFFFFFF);
+        }
+        for (int x = 0; x < width; x++) {
+            edgeImage.setRGB(x, 0, 0xFFFFFFFF);
         }
 
         int offset = vertFilter.length / 2;
