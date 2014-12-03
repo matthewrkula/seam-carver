@@ -46,9 +46,9 @@ public class Carver {
     }
 
     public void carve(int rows, int columns) {
-//        for (int i=0; i < columns; i++) {
+        for (int i=0; i < columns; i++) {
             verticalCarve();
-//        }
+        }
         Utils.saveImage("done.png", mImage);
     }
 
