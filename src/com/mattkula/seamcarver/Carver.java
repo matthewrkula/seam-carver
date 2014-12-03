@@ -81,7 +81,7 @@ public class Carver {
         }
 
         BufferedImage newImage = new BufferedImage(width - 1, height, BufferedImage.TYPE_INT_ARGB);
-        int foundOffset = 0;
+        int foundOffset;
         for (int y = 0; y < height; y++) {
             foundOffset = 0;
             for (int x = 0; x < width - 1; x++) {
