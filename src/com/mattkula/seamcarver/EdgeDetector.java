@@ -32,9 +32,6 @@ public class EdgeDetector {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                if (x == 0 || y == 0 || x >= width - 1 || y >= height - 1) {
-                    continue;
-                }
                 edgeImage.setRGB(x, y, 0xFFFFFFFF);
             }
         }
