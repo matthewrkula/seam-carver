@@ -11,6 +11,8 @@ import java.io.IOException;
  */
 public class Carver {
 
+    public static boolean DEBUG = true;
+
     BufferedImage mImage;
     BufferedImage mGreyscaleImage;
     BufferedImage mEdgeImage;
@@ -33,7 +35,7 @@ public class Carver {
 
     private void detectEdges() {
         mEdgeImage = EdgeDetector.getEdges(mGreyscaleImage, EdgeDetector.Type.SOBEL);
-        Utils.saveImage("edges.png", mEdgeImage);
+        if (DEBUG) Utils.saveImage("edges.png", mEdgeImage);
     }
 
     public void carve() {
@@ -87,7 +89,7 @@ public class Carver {
                 newImage.setRGB(x, y, mImage.getRGB(x + (found ? 1 : 0), y));
             }
         }
-        Utils.saveImage("lastline.png", mImage);
+        if (DEBUG) Utils.saveImage("lastline.png", mImage);
         Utils.saveImage("done.png", newImage);
     }
 

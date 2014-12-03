@@ -7,9 +7,9 @@ public class Main {
         try {
 //            new Carver("/home/matt/Pictures/core05-4.png").carve();
 //            new Carver("/home/matt/Pictures/castle.png").carve();
-            for (int i = 0; i < 40; i++) {
-                new Carver("/home/matt/Pictures/done.png").carve();
-            }
+//            for (int i = 0; i < 40; i++) {
+                new Carver("/home/matt/Pictures/lake.png").carve();
+//            }
         } catch (IOException e) {
             System.err.println("Image could not be found.");
         }
