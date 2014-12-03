@@ -123,15 +123,17 @@ public class Carver {
     }
 
     private class PixelPosition {
+
+        int cost, x, y;
+        boolean deleted = false;
+
+        PixelPosition previousPosition = null;
+
         public PixelPosition(int cost, PixelPosition previousPosition, int x, int y) {
             this.previousPosition = previousPosition;
             this.cost = cost;
             this.x = x;
             this.y = y;
         }
-        int cost = -1;
-        int x, y;
-        PixelPosition previousPosition = null;
-        boolean deleted = false;
     }
 }
