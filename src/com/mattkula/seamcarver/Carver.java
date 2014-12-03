@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 
 /**
  * Created by matt on 12/2/14.
@@ -13,13 +14,19 @@ public class Carver {
 
     public static boolean DEBUG = true;
 
+    String mName;
     BufferedImage mImage;
     BufferedImage mGreyscaleImage;
     BufferedImage mEdgeImage;
     int height, width;
 
     public Carver(String name) throws IOException {
-        mImage = ImageIO.read(new File(name));
+        mName = name;
+        setImage(ImageIO.read(new File(name)));
+    }
+
+    private void setImage(BufferedImage image) {
+        mImage = image;
         height = mImage.getHeight();
         width = mImage.getWidth();
         generateGreyscaleImage();
@@ -38,8 +45,11 @@ public class Carver {
         if (DEBUG) Utils.saveImage("edges.png", mEdgeImage);
     }
 
-    public void carve() {
-        verticalCarve();
+    public void carve(int rows, int columns) {
+//        for (int i=0; i < columns; i++) {
+            verticalCarve();
+//        }
+        Utils.saveImage("done.png", mImage);
     }
 
     private void verticalCarve() {
@@ -74,23 +84,25 @@ public class Carver {
         PixelPosition pixel = getStartingPixelPosition(pathMap[height-1]);
 
         while (pixel != null) {
-            mImage.setRGB(pixel.x, pixel.y, 0xFFFF0000);
+            if (DEBUG) mImage.setRGB(pixel.x, pixel.y, 0xFFFF0000);
             pixel.deleted = true;
             pixel = pixel.previousPosition;
         }
 
         BufferedImage newImage = new BufferedImage(width - 1, height, BufferedImage.TYPE_INT_ARGB);
+        int foundOffset = 0;
         for (int y = 0; y < height; y++) {
-            boolean found = false;
+            foundOffset = 0;
             for (int x = 0; x < width - 1; x++) {
                 if (pathMap[y][x].deleted) {
-                    found = true;
+                    foundOffset = 1;
                 }
-                newImage.setRGB(x, y, mImage.getRGB(x + (found ? 1 : 0), y));
+                newImage.setRGB(x, y, mImage.getRGB(x + foundOffset, y));
             }
         }
         if (DEBUG) Utils.saveImage("lastline.png", mImage);
-        Utils.saveImage("done.png", newImage);
+
+        setImage(newImage);
     }
 
     private PixelPosition getStartingPixelPosition(PixelPosition[] array) {
