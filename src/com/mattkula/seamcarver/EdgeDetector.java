@@ -48,7 +48,10 @@ public class EdgeDetector {
                 int horz = 0;
                 for (int i = -offset; i < vertFilter.length - offset; i++) {
                     for (int j = -offset; j < vertFilter.length - offset; j++) {
-                        v = image.getRGB(x + j, y + i) & 0xFF;
+                        v = image.getRGB(x + j, y + i);
+                        v = (((v >> 16) & 0xFF) +
+                                ((v >> 8) & 0xFF) +
+                                ((v >> 0) & 0xFF)) / 3;
                         vert += vertFilter[i+offset][j+offset] * v;
                         horz += horzFilter[i+offset][j+offset] * v;
                     }

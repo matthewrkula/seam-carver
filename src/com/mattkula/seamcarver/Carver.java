@@ -12,11 +12,10 @@ import java.nio.Buffer;
  */
 public class Carver {
 
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     String mName;
     BufferedImage mImage;
-    BufferedImage mGreyscaleImage;
     BufferedImage mEdgeImage;
     int height, width;
 
@@ -29,19 +28,11 @@ public class Carver {
         mImage = image;
         height = mImage.getHeight();
         width = mImage.getWidth();
-        generateGreyscaleImage();
         detectEdges();
     }
 
-    private void generateGreyscaleImage() {
-        mGreyscaleImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
-        Graphics g = mGreyscaleImage.getGraphics();
-        g.drawImage(mImage, 0, 0, null);
-        g.dispose();
-    }
-
     private void detectEdges() {
-        mEdgeImage = EdgeDetector.getEdges(mGreyscaleImage, EdgeDetector.Type.SOBEL);
+        mEdgeImage = EdgeDetector.getEdges(mImage, EdgeDetector.Type.SOBEL);
         if (DEBUG) Utils.saveImage("edges.png", mEdgeImage);
     }
 
