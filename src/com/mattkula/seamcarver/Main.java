@@ -10,7 +10,7 @@ public class Main {
 //            new Carver("/home/matt/Pictures/core05-4.png").carve();
 //            new Carver("/home/matt/Pictures/castle.png").carve();
 //            for (int i = 0; i < 40; i++) {
-                new Carver("/home/matt/Pictures/lake.png").carve();
+                new Carver("/home/matt/Pictures/castle.png").carve();
 //            }
 
             System.out.println(String.format("%dms", System.currentTimeMillis() - time));
